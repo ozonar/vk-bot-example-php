@@ -3,6 +3,13 @@
 const VK_API_VERSION = '5.81'; //Используемая версия API
 const VK_API_ENDPOINT = 'https://api.vk.com/method/';
 
+/**
+ * @param $peer_id
+ * @param $message
+ * @param array $attachments
+ * @return mixed
+ * @throws Exception
+ */
 function vkApi_messagesSend($peer_id, $message, $attachments = array())
 {
     return _vkApi_call('messages.send', array(
@@ -12,6 +19,11 @@ function vkApi_messagesSend($peer_id, $message, $attachments = array())
     ));
 }
 
+/**
+ * @param $user_id
+ * @return mixed
+ * @throws Exception
+ */
 function vkApi_usersGet($user_id)
 {
     return _vkApi_call('users.get', array(
@@ -19,6 +31,11 @@ function vkApi_usersGet($user_id)
     ));
 }
 
+/**
+ * @param $peer_id
+ * @return mixed
+ * @throws Exception
+ */
 function vkApi_photosGetMessagesUploadServer($peer_id)
 {
     return _vkApi_call('photos.getMessagesUploadServer', array(
@@ -26,6 +43,13 @@ function vkApi_photosGetMessagesUploadServer($peer_id)
     ));
 }
 
+/**
+ * @param $photo
+ * @param $server
+ * @param $hash
+ * @return mixed
+ * @throws Exception
+ */
 function vkApi_photosSaveMessagesPhoto($photo, $server, $hash)
 {
     return _vkApi_call('photos.saveMessagesPhoto', array(
@@ -35,6 +59,12 @@ function vkApi_photosSaveMessagesPhoto($photo, $server, $hash)
     ));
 }
 
+/**
+ * @param $peer_id
+ * @param $type
+ * @return mixed
+ * @throws Exception
+ */
 function vkApi_docsGetMessagesUploadServer($peer_id, $type)
 {
     return _vkApi_call('docs.getMessagesUploadServer', array(
@@ -43,6 +73,12 @@ function vkApi_docsGetMessagesUploadServer($peer_id, $type)
     ));
 }
 
+/**
+ * @param $file
+ * @param $title
+ * @return mixed
+ * @throws Exception
+ */
 function vkApi_docsSave($file, $title)
 {
     return _vkApi_call('docs.save', array(
@@ -51,6 +87,12 @@ function vkApi_docsSave($file, $title)
     ));
 }
 
+/**
+ * @param $method
+ * @param array $params
+ * @return mixed
+ * @throws Exception
+ */
 function _vkApi_call($method, $params = array())
 {
     $params['access_token'] = VK_API_ACCESS_TOKEN;
@@ -79,6 +121,12 @@ function _vkApi_call($method, $params = array())
     return $response['response'];
 }
 
+/**
+ * @param $url
+ * @param $file_name
+ * @return mixed
+ * @throws Exception
+ */
 function vkApi_upload($url, $file_name)
 {
     if (!file_exists($file_name)) {
