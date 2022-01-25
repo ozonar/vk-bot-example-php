@@ -38,6 +38,8 @@ function callback_handleEvent() {
     }
   } catch (Exception $e) {
     log_error($e);
+    _callback_response($e->getMessage());
+    return;
   }
 
   _callback_okResponse();
