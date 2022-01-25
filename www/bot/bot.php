@@ -28,16 +28,3 @@ function _bot_uploadPhoto($user_id, $file_name)
 
     return $photo;
 }
-
-function _bot_uploadVoiceMessage($user_id, $file_name)
-{
-    $upload_server_response = vkApi_docsGetMessagesUploadServer($user_id, 'audio_message');
-    $upload_response = vkApi_upload($upload_server_response['upload_url'], $file_name);
-
-    $file = $upload_response['file'];
-
-    $save_response = vkApi_docsSave($file, 'Voice message');
-    $doc = array_pop($save_response);
-
-    return $doc;
-}

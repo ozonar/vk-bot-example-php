@@ -3,11 +3,12 @@
 const CALLBACK_API_EVENT_CONFIRMATION = 'confirmation';
 const CALLBACK_API_EVENT_MESSAGE_NEW = 'message_new';
 
+require_once '../vendor/autoload.php';
+
 require_once 'config.php';
 require_once 'global.php';
 
 require_once 'api/vk_api.php';
-
 require_once 'bot/bot.php';
 
 if (!isset($_REQUEST)) {

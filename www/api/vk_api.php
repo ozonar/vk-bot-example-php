@@ -102,20 +102,12 @@ function _vkApi_call($method, $params = array())
     $query = http_build_query($params);
     $url = VK_API_ENDPOINT . $method . '?' . $query;
 
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    $json = curl_exec($curl);
-    $error = curl_error($curl);
-    if ($error) {
-        log_error($error);
-        throw new Exception("Failed $method request");
-    }
+    $client = new \GuzzleHttp\Client();
+    $result = $client->post($url, $params);
+    $response = json_decode($result->getBody()->getContents(), true);
 
-    curl_close($curl);
-
-    $response = json_decode($json, true);
     if (!$response || !isset($response['response'])) {
-        log_error($json);
+        log_error($response);
         throw new Exception("Invalid response for $method request\n" . $response['error']['error_msg']);
     }
 
@@ -134,20 +126,33 @@ function vkApi_upload($url, $file_name)
         throw new Exception('File not found: ' . $file_name);
     }
 
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, array('file' => new CURLfile($file_name)));
-    $json = curl_exec($curl);
-    $error = curl_error($curl);
-    if ($error) {
-        log_error($error);
-        throw new Exception("Failed $url request");
-    }
+    $client = new \GuzzleHttp\Client();
+    $result = $client->post($url, [
+        'multipart' => [
+            [
+                'name' => 'file',
+                'contents' => GuzzleHttp\Psr7\Utils::tryFopen($file_name, 'r')
+            ],
+        ]
+    ]);
 
-    curl_close($curl);
+    $response = json_decode($result->getBody()->getContents(), true);
 
-    $response = json_decode($json, true);
+//    $curl = curl_init($url);
+//    curl_setopt($curl, CURLOPT_POST, true);
+//    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//    curl_setopt($curl, CURLOPT_POSTFIELDS, array('file' => new CURLfile($file_name)));
+//    $json = curl_exec($curl);
+//    $error = curl_error($curl);
+//    if ($error) {
+//        log_error($error);
+//        throw new Exception("Failed $url request");
+//    }
+//
+//    curl_close($curl);
+
+//    $response = json_decode($json, true);
+
     if (!$response) {
         throw new Exception("Invalid response for $url request");
     }
