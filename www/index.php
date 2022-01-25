@@ -9,7 +9,7 @@ require_once 'config.php';
 require_once 'global.php';
 
 require_once 'api/vk_api.php';
-require_once 'bot/bot.php';
+require_once 'bot/Bot.php';
 
 if (!isset($_REQUEST)) {
     exit;
@@ -46,6 +46,9 @@ function callback_handleEvent()
     _callback_okResponse();
 }
 
+/**
+ * @return mixed
+ */
 function _callback_getEvent()
 {
     return json_decode(file_get_contents('php://input'), true);
@@ -56,10 +59,15 @@ function _callback_handleConfirmation()
     _callback_response(CALLBACK_API_CONFIRMATION_TOKEN);
 }
 
+/**
+ * @param $data
+ * @throws Exception
+ */
 function _callback_handleMessageNew($data)
 {
     $user_id = $data['user_id'];
-    bot_sendMessage($user_id);
+
+    (new Bot)->sendMessage($user_id);
     _callback_okResponse();
 }
 
@@ -68,10 +76,11 @@ function _callback_okResponse()
     _callback_response('ok');
 }
 
+/**
+ * @param $data
+ */
 function _callback_response($data)
 {
     echo $data;
     exit();
 }
-
-
