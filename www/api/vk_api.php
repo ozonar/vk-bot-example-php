@@ -1,6 +1,6 @@
 <?php
 
-const VK_API_VERSION = '5.81'; //Используемая версия API
+const VK_API_VERSION = '5.131'; //Используемая версия API
 const VK_API_ENDPOINT = 'https://api.vk.com/method/';
 
 /**
@@ -12,11 +12,12 @@ const VK_API_ENDPOINT = 'https://api.vk.com/method/';
  */
 function vkApi_messagesSend($peer_id, $message, $attachments = array())
 {
-    return _vkApi_call('messages.send', array(
+    return _vkApi_call('messages.send', [
+        'random_id' => rand(1000000000000, 9999999999999),
         'peer_id' => $peer_id,
         'message' => $message,
         'attachment' => implode(',', $attachments)
-    ));
+    ]);
 }
 
 /**
@@ -115,7 +116,7 @@ function _vkApi_call($method, $params = array())
     $response = json_decode($json, true);
     if (!$response || !isset($response['response'])) {
         log_error($json);
-        throw new Exception("Invalid response for $method request");
+        throw new Exception("Invalid response for $method request\n" . $response['error']['error_msg']);
     }
 
     return $response['response'];
