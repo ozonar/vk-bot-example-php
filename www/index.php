@@ -8,7 +8,7 @@ require_once '../vendor/autoload.php';
 require_once 'config.php';
 require_once 'global.php';
 
-require_once 'api/vk_api.php';
+require_once 'api/VkApi.php';
 require_once 'bot/Bot.php';
 
 if (!isset($_REQUEST)) {
