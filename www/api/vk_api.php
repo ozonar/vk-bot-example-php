@@ -107,7 +107,7 @@ function _vkApi_call($method, $params = array())
     $error = curl_error($curl);
     if ($error) {
         log_error($error);
-        throw new Exception("Failed {$method} request");
+        throw new Exception("Failed $method request");
     }
 
     curl_close($curl);
@@ -115,7 +115,7 @@ function _vkApi_call($method, $params = array())
     $response = json_decode($json, true);
     if (!$response || !isset($response['response'])) {
         log_error($json);
-        throw new Exception("Invalid response for {$method} request");
+        throw new Exception("Invalid response for $method request");
     }
 
     return $response['response'];
@@ -141,14 +141,14 @@ function vkApi_upload($url, $file_name)
     $error = curl_error($curl);
     if ($error) {
         log_error($error);
-        throw new Exception("Failed {$url} request");
+        throw new Exception("Failed $url request");
     }
 
     curl_close($curl);
 
     $response = json_decode($json, true);
     if (!$response) {
-        throw new Exception("Invalid response for {$url} request");
+        throw new Exception("Invalid response for $url request");
     }
 
     return $response;
