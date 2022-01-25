@@ -1,0 +1,42 @@
+POST http://zdnizbot.3qa.ru/
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "type": "message_new",
+  "object": {
+    "message": {
+      "date": 1643134365,
+      "from_id": 8403756,
+      "id": 8,
+      "out": 0,
+      "attachments": [],
+      "conversation_message_id": 8,
+      "fwd_messages": [],
+      "important": false,
+      "is_hidden": false,
+      "peer_id": 8403756,
+      "random_id": 0,
+      "text": "s"
+    },
+    "client_info": {
+      "button_actions": [
+        "text",
+        "vkpay",
+        "open_app",
+        "location",
+        "open_link",
+        "callback",
+        "intent_subscribe",
+        "intent_unsubscribe"
+      ],
+      "keyboard": true,
+      "inline_keyboard": true,
+      "carousel": true,
+      "lang_id": 0
+    }
+  },
+  "group_id": 84681287,
+  "event_id": "5015e89ac3090c770533186dc2f1586cc22a5a2e"
+}

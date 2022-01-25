@@ -1,0 +1,21 @@
+POST http://zdnizbot.3qa.ru/
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "type": "message_new",
+  "object": {
+    "id": 12,
+    "date": 1643135613,
+    "out": 0,
+    "user_id": 8403756,
+    "read_state": 0,
+    "title": "",
+    "body": "d",
+    "owner_ids": []
+  },
+  "group_id": 84681287,
+  "event_id": "f02506c5163ecafb38886c9381ef5e869c015de5",
+  "secret": "lkjbnlkjfnbls75yg4957gh49g6h45789g6"
+}
