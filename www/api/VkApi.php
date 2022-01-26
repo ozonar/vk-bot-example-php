@@ -27,25 +27,7 @@ class VkApi
             'peer_id' => $peer_id,
             'message' => $message,
             'attachment' => implode(',', $attachments),
-            'keyboard' => json_encode([
-                'one_time' => true,
-                'buttons' => [[
-                    [
-                        'color' => 'primary',
-                        'action' => [
-                            'type' => 'text',
-                            'label' => 'Получить случайное ',
-                        ]
-                    ],
-                    [
-                        'color' => 'primary',
-                        'action' => [
-                            'type' => 'text',
-                            'label' => 'Не играть в письки-попки',
-                        ]
-                    ]
-                ]]
-            ])
+
         ]);
     }
 
