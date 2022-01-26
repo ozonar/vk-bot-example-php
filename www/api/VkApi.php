@@ -7,7 +7,8 @@ use GuzzleHttp\Exception\GuzzleException;
 /**
  *
  */
-class VkApi {
+class VkApi
+{
 
     const VK_API_VERSION = '5.131';
     const VK_API_ENDPOINT = 'https://api.vk.com/method/';
@@ -19,7 +20,7 @@ class VkApi {
      * @return mixed
      * @throws Exception|GuzzleException
      */
-    public function messagesSend($peer_id, $message, $attachments = array())
+    public function messagesSend($peer_id, $message, $attachments = [])
     {
         return $this->call('messages.send', [
             'random_id' => rand(1000000000000, 9999999999999),
@@ -36,9 +37,9 @@ class VkApi {
      */
     public function usersGet($user_id)
     {
-        return $this->call('users.get', array(
+        return $this->call('users.get', [
             'user_id' => $user_id,
-        ));
+        ]);
     }
 
     /**
@@ -48,9 +49,9 @@ class VkApi {
      */
     public function photosGetMessagesUploadServer($peer_id)
     {
-        return $this->call('photos.getMessagesUploadServer', array(
+        return $this->call('photos.getMessagesUploadServer', [
             'peer_id' => $peer_id,
-        ));
+        ]);
     }
 
     /**
@@ -62,11 +63,11 @@ class VkApi {
      */
     public function photosSaveMessagesPhoto($photo, $server, $hash)
     {
-        return $this->call('photos.saveMessagesPhoto', array(
+        return $this->call('photos.saveMessagesPhoto', [
             'photo' => $photo,
             'server' => $server,
             'hash' => $hash,
-        ));
+        ]);
     }
 
     /**
@@ -77,10 +78,10 @@ class VkApi {
      */
     public function docsGetMessagesUploadServer($peer_id, $type)
     {
-        return $this->call('docs.getMessagesUploadServer', array(
+        return $this->call('docs.getMessagesUploadServer', [
             'peer_id' => $peer_id,
             'type' => $type,
-        ));
+        ]);
     }
 
     /**
@@ -91,10 +92,10 @@ class VkApi {
      */
     public function docsSave($file, $title)
     {
-        return $this->call('docs.save', array(
+        return $this->call('docs.save', [
             'file' => $file,
             'title' => $title,
-        ));
+        ]);
     }
 
     /**
@@ -103,7 +104,7 @@ class VkApi {
      * @return mixed
      * @throws Exception|GuzzleException
      */
-    private function call($method, $params = array())
+    private function call($method, $params = [])
     {
         $params['access_token'] = VK_API_ACCESS_TOKEN;
         $params['v'] = self::VK_API_VERSION;

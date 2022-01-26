@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Exception\GuzzleException;
+
 const CALLBACK_API_EVENT_CONFIRMATION = 'confirmation';
 const CALLBACK_API_EVENT_MESSAGE_NEW = 'message_new';
 
@@ -62,6 +64,7 @@ function _callback_handleConfirmation()
 /**
  * @param $data
  * @throws Exception
+ * @throws GuzzleException
  */
 function _callback_handleMessageNew($data)
 {

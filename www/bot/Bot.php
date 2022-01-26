@@ -3,9 +3,11 @@
 
 use GuzzleHttp\Exception\GuzzleException;
 
-class Bot {
+class Bot
+{
 
     private $vkApi;
+
     public function __construct()
     {
         $this->vkApi = new VkApi();
@@ -24,9 +26,9 @@ class Bot {
         $msg = "Привет, {$user['first_name']}!";
         $photo = $this->uploadPhoto($user_id, BOT_IMAGES_DIRECTORY . '/cat.jpeg');
 
-        $attachments = array(
+        $attachments = [
             'photo' . $photo['owner_id'] . '_' . $photo['id'],
-        );
+        ];
 
         $this->vkApi->messagesSend($user_id, $msg, $attachments);
     }
